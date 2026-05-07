@@ -117,6 +117,8 @@ The `rule-visibility-items` shorthand sets both at once.
 
 ## Demos
 
+All demos are available at [jav099.github.io/gap-decorations-blog-demos](https://jav099.github.io/gap-decorations-blog-demos/).
+
 The [developer trial blog post](https://developer.chrome.com/blog/gap-decorations) includes several more demos, including an [interactive playground](https://microsoftedge.github.io/Demos/css-gap-decorations/playground.html), a [burger menu](https://microsoftedge.github.io/Demos/css-gap-decorations/burger-menu.html), a [notebook layout](https://microsoftedge.github.io/Demos/css-gap-decorations/notebook.html), and a [magazine-style layout](https://microsoftedge.github.io/Demos/css-gap-decorations/daily-css-news.html) with a sudoku grid.
 
 ### Split screen
@@ -127,7 +129,7 @@ A flex container with three panels using a list of styles: `dashed, solid` for t
 
 ![Split screen demo on mobile](screenshots/split-screen-2.png)
 
-[Try it](TODO)
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/split-screen.html)
 
 ### Settings list
 
@@ -135,7 +137,7 @@ A flex column where `repeat()` creates grouped separators. The pattern `repeat(2
 
 ![Settings list demo](screenshots/settings.png)
 
-[Try it](TODO)
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/settings-list.html)
 
 ### Dashboard grid
 
@@ -143,7 +145,7 @@ A grid dashboard with alternating column rule colors and widths. On hover, the r
 
 ![Dashboard grid demo](screenshots/dashboard.png)
 
-[Try it](TODO)
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/dashboard-grid.html)
 
 ### Calendar week view
 
@@ -151,7 +153,7 @@ A weekly calendar grid with alternating row rules: solid for hour boundaries, da
 
 ![Calendar week view demo](screenshots/calendar.png)
 
-[Try it](TODO)
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/calendar-week.html)
 
 ### Dynamic flex items
 
@@ -159,7 +161,7 @@ A wrapping flex container where items can be added or removed. The decorations a
 
 ![Dynamic flex items demo](screenshots/flex-items.png)
 
-[Try it](TODO)
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/dynamic-items.html)
 
 ### Photo gallery
 
@@ -167,7 +169,7 @@ A grid with intentional empty cells, demonstrating `rule-visibility-items`. Togg
 
 ![Photo gallery demo](screenshots/image-gallery.png)
 
-[Try it](TODO)
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/photo-gallery.html)
 
 ## What changed since the developer trial
 
