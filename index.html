@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSS Gap Decorations Demos</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: #f5f5f0;
+    color: #2c2c34;
+    padding: 40px 24px;
+    min-height: 100vh;
+  }
+
+  h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    max-width: 960px;
+    margin: 0 auto 8px;
+  }
+
+  .intro {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 32px;
+    max-width: 960px;
+    margin: 0 auto 32px;
+    line-height: 1.5;
+  }
+
+  .intro a { color: #2563eb; }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04);
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .card:hover {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+
+  .card img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid #eee;
+  }
+
+  .card-body {
+    padding: 14px 16px;
+  }
+
+  .card-body h2 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .card-body p {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.4;
+  }
+</style>
+</head>
+<body>
+
+<h1>CSS Gap Decorations Demos</h1>
+<p class="intro">Interactive demos for <a href="https://www.w3.org/TR/css-gaps-1/">CSS Gap Decorations</a>, shipping in Chrome 149. Each demo showcases different properties and use cases.</p>
+
+<div class="gallery">
+  <a class="card" href="demos/split-screen.html">
+    <img src="screenshots/split-screen-1.png" alt="Split screen demo">
+    <div class="card-body">
+      <h2>Split Screen</h2>
+      <p>Flex layout with dashed/solid rule styles, responsive</p>
+    </div>
+  </a>
+
+  <a class="card" href="demos/settings-list.html">
+    <img src="screenshots/settings.png" alt="Settings list demo">
+    <div class="card-body">
+      <h2>Settings List</h2>
+      <p>Grouped separators with repeat() syntax</p>
+    </div>
+  </a>
+
+  <a class="card" href="demos/dashboard-grid.html">
+    <img src="screenshots/dashboard.png" alt="Dashboard grid demo">
+    <div class="card-body">
+      <h2>Dashboard Grid</h2>
+      <p>Animated rule colors and insets on hover</p>
+    </div>
+  </a>
+
+  <a class="card" href="demos/calendar-week.html">
+    <img src="screenshots/calendar.png" alt="Calendar week view demo">
+    <div class="card-body">
+      <h2>Calendar Week View</h2>
+      <p>Alternating solid/dashed row rules for hours</p>
+    </div>
+  </a>
+
+  <a class="card" href="demos/dynamic-items.html">
+    <img src="screenshots/flex-items.png" alt="Dynamic flex items demo">
+    <div class="card-body">
+      <h2>Dynamic Flex Items</h2>
+      <p>Add, remove, and resize with automatic decorations</p>
+    </div>
+  </a>
+
+  <a class="card" href="demos/photo-gallery.html">
+    <img src="screenshots/image-gallery.png" alt="Photo gallery demo">
+    <div class="card-body">
+      <h2>Photo Gallery</h2>
+      <p>Toggle rule-visibility-items around empty grid cells</p>
+    </div>
+  </a>
+</div>
+
+</body>
+</html>
