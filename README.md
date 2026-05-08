@@ -3,9 +3,9 @@
 **Authors:** Javier Contreras, Sam Davis Omekara Jr
 **Published:** 2026-05-06
 
-If you've used borders or pseudo-elements to draw lines between grid or flex items, there's a native alternative now. CSS gap decorations ship in Chrome 149. They let you style the gaps in grid, flexbox, and multi-column layouts without extra markup.
+If you've used borders or pseudo-elements to draw lines between grid or flex items, there's a native alternative now. CSS gap decorations shipped in Chrome and Edge 149. You can now  style the gaps in grid, flexbox, and multi-column layouts without any extra markup.
 
-This was built in collaboration with Microsoft's Edge team, based on the existing `column-rule` property and the [CSS Gap Decorations specification](https://www.w3.org/TR/css-gaps-1/).
+This feature was built in collaboration between the Microsoft Edge and Google Chrome teams, based on the [CSS Gap Decorations specification](https://www.w3.org/TR/css-gaps-1/).
 
 ## Useful links
 
@@ -22,26 +22,13 @@ Styling gaps between layout items has always required workarounds. Borders on in
 - **They interfere with accessibility.** Extra DOM elements show up in the accessibility tree when they shouldn't.
 - **They're hard to maintain.** Responsive layouts break the assumptions your gap styling was built on.
 - **They hurt performance.** More DOM nodes, more layout work.
+- **Poor authoring ergonomics.** Complex geometric calculations were often needed to get things working correctly.
 
-The `column-rule` property already handles this for multi-column layouts. But grid and flexbox had nothing equivalent.
+The column-rule property already handles this for multi-column layouts. But grid and flexbox had no equivalent functionality.
 
 ## The solution
 
-Grid and flexbox containers now accept `column-rule`, which previously only worked in multi-column layouts. A new `row-rule` property handles horizontal gaps. The decorations are purely visual and won't affect your existing layouts. If you already use `column-rule` in multi-column, nothing changes for you.
-
-### New properties
-
-Gap decorations add `row-rule` alongside `column-rule`. Both accept the same shorthand for width, style, and color. The `rule` shorthand sets both at once.
-
-Here's what you can control for the decorations:
-
-- **Break behavior** (`*-rule-break`, `rule-break`): whether decorations break at gap intersections or run continuously.
-- **Insets** (`*-rule-inset-*`): how far decorations extend within a gap, with symmetric and asymmetric options.
-- **Visibility** (`*-rule-visibility-items`): when rules appear based on item adjacency.
-- **Varying styles** (`repeat()`): different decoration widths, styles, or colors across gaps in a container.
-- **Animations**: rule width, color, and insets are animatable, so you can transition them smoothly.
-
-`row-rule` and `column-rule` use the same shorthand syntax across grid, flexbox, and multi-column:
+Grid and flexbox containers now accept column-rule, which previously only worked in multi-column layouts. A new row-rule property handles horizontal gaps. The decorations are purely visual and won't affect your existing layouts. If you already use column-rule in multi-column, nothing changes for you.
 
 ```css
 .grid {
@@ -51,6 +38,12 @@ Here's what you can control for the decorations:
   row-rule: 1px solid #ccc;
 }
 ```
+
+Both `row-rule` and `column-rule` accept the same shorthand for width, style, and color. The `rule` shorthand sets both at once.
+
+### New properties
+
+However, we didn't just bring `column-rule` to other layout modes and add the `row` counterpart. We also introduced controls for fine-tuning your decorations: how they break at intersections, how far they inset from gap edges, when they appear relative to items, and how to vary styles across gaps. Rule width, color, and insets are all animatable too.
 
 ### The repeat() syntax
 
@@ -62,6 +55,8 @@ Gap decorations support `repeat()` for their width, style, and color values. Thi
   column-rule-style: solid;
 }
 ```
+
+<TODO: small HTML diagram displaying what the above CSS would look like>
 
 This gives the first two column gaps a 1px rule and the third a 4px rule, cycling if there are more gaps than values.
 
@@ -86,22 +81,57 @@ The `column-rule-break` and `row-rule-break` properties control how decorations 
 
 ```css
 .grid {
-  column-rule: 1px solid #ccc;
+  column-rule: 1px solid #5a9e9e;
+  row-rule: 1px solid #c27a6b;
   column-rule-break: intersection;
+  row-rule-break: intersection;
 }
 ```
 
-### Insets
-
-The `*-rule-inset-*` properties control how far decorations extend within a gap. You can set insets on all sides at once with shorthands like `column-rule-inset`, or target assymetrically with longhands like `*-inset-cap-start` and `*-inset-junction-end`. Values can be lengths, percentages, or the `overlap-join` keyword.
+<TODO: small HTML diagram displaying what the above CSS would look like>
 
 ```css
 .grid {
-  column-rule: 1px solid #ccc;
-  column-rule-break: intersection;
-  column-rule-inset: 5px; /* 5px inset on all segment endpoints */
+  column-rule: 1px solid #5a9e9e;
+  row-rule: 1px solid #c27a6b;
+  column-rule-break: none;
+  row-rule-break: none;
 }
 ```
+
+<TODO: small HTML diagram displaying what the above CSS would look like>
+
+### Insets
+
+The `column-rule-inset` and `row-rule-inset` properties control how far decorations extend within a gap. You can set insets on all sides at once with the shorthand, or target insets asymmetrically with`column-rule-inset-cap` and `column-rule-inset-junction`. Values can be lengths, percentages, or the `overlap-join` keyword.
+
+```css
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  column-rule: 1px solid #5a9e9e;
+  row-rule: 1px solid #c27a6b;
+  column-rule-inset: 9px;
+  row-rule-inset: 9px;
+}
+```
+
+<TODO: small HTML diagram displaying what the above CSS would look like>
+
+```css
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  column-rule: 1px solid #5a9e9e;
+  row-rule: 1px solid #c27a6b;
+  column-rule-inset-cap: 16px;
+  column-rule-inset-junction: 0px;
+  row-rule-inset-cap: 16px;
+  row-rule-inset-junction: 0px;
+}
+```
+
+<TODO: small HTML diagram displaying what the above CSS would look like>
 
 
 ### Visibility
@@ -114,6 +144,43 @@ The `*-rule-inset-*` properties control how far decorations extend within a gap.
 - `between`: rules appear only between two adjacent items
 
 The `rule-visibility-items` shorthand sets both at once.
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-rule: 1px solid #5a9e9e;
+  row-rule: 1px solid #c27a6b;
+  rule-visibility-items: all;
+}
+```
+
+```css
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-rule: 1px solid #5a9e9e;
+  row-rule: 1px solid #c27a6b;
+  rule-visibility-items: between;
+}
+```
+
+### Animations
+
+Rule width, color, and insets are animatable. You can transition them on hover or any other state change:
+
+```css
+.grid {
+  column-rule: 1px solid #ccc;
+  column-rule-inset: 0px;
+  transition: column-rule-color 0.3s, column-rule-inset 0.3s;
+}
+
+.grid:hover {
+  column-rule-color: tomato;
+  column-rule-inset: 10px;
+}
+```
 
 ## Demos
 
@@ -176,8 +243,8 @@ A grid with intentional empty cells, demonstrating `rule-visibility-items`. Togg
 If you tried gap decorations during the developer trial (Chrome 139), here's what changed:
 
 - The feature ships by default, no flags needed
-- Property names were updated to align with the spec (e.g., `*-rule-offset` became `*-rule-inset-*` sub-properties)
-- The `*-rule-visibility-items` properties were added
+- Property names were updated to align with the spec (e.g., `column-rule-outset` and `row-rule-outset` became `column-rule-inset` and `row-rule-inset` sub-properties)
+- The `column-rule-visibility-items` and `row-rule-visibility-items` properties were added
 - Animation support was added.
 
 ## Browser support

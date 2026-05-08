@@ -11,7 +11,8 @@ Demos for the Chrome 149 gap decorations blog post. Hosted on GitHub Pages.
 ## Directory structure
 
 ```
-├── README.md              # Blog post markdown
+├── README.md              # Blog post markdown (source of truth)
+├── gap-decorations-chrome-149.html  # HTML version for Google Doc publishing
 ├── index.html             # Gallery landing page (links to demos)
 ├── demos/                 # Self-contained HTML demos (each has own styles/fonts/JS)
 │   ├── split-screen.html  # Flex, dashed/solid rule styles, responsive
@@ -19,7 +20,8 @@ Demos for the Chrome 149 gap decorations blog post. Hosted on GitHub Pages.
 │   ├── dashboard-grid.html# Grid, animated rule colors/insets on hover
 │   ├── calendar-week.html # Grid, alternating solid/dashed row rules
 │   ├── dynamic-items.html # Flex wrap, add/remove/resize items, JS interactive
-│   └── photo-gallery.html # Grid with empty cells, rule-visibility-items toggle
+│   ├── photo-gallery.html # Grid with empty cells, rule-visibility-items toggle
+│   └── interactive-playground.html # Interactive controls for all gap decoration properties
 └── screenshots/           # PNGs used in README and index.html
 ```
 
@@ -39,3 +41,9 @@ Demos for the Chrome 149 gap decorations blog post. Hosted on GitHub Pages.
 - Inset properties are NOT list-valued (can't vary per gap).
 - Each demo is fully self-contained. No shared CSS or JS between demos.
 - The gallery index.html uses screenshots as thumbnails linking to each demo.
+
+## Blog post pipeline
+
+1. **Markdown** — `README.md` is the source of truth for blog post content.
+2. **HTML** — `gap-decorations-chrome-149.html` is the HTML version for review.
+3. **Google Doc** — Javier manually posts the HTML into a Google Doc for publishing.
