@@ -75,7 +75,7 @@ This alternates between red and blue for each row gap.
 
 The `column-rule-break` and `row-rule-break` properties control how decorations behave at gap intersections:
 
-- `normal` (default)
+- `normal` (default) Behavior depends on the type of container. More information in the [spec](https://www.w3.org/TR/css-gaps-1/#breaks).
 - `none`: decorations run continuously through intersections
 - `intersection`: decorations break where row and column gaps cross
 
@@ -230,13 +230,13 @@ A wrapping flex container where items can be added or removed. The decorations a
 
 [Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/dynamic-items.html)
 
-### Photo gallery
+### Article grid
 
-A grid with intentional empty cells, demonstrating `rule-visibility-items`. Toggle between `normal`, `all`, `between`, and `around` to see how rules appear or disappear around empty slots.
+A grid of articles with intentional empty cells, demonstrating `rule-visibility-items`. Toggle between `normal`, `all`, `between`, and `around` to see how rules appear or disappear around empty slots.
 
-![Photo gallery demo](screenshots/image-gallery.png)
+![Article grid demo](screenshots/article-grid.png)
 
-[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/photo-gallery.html)
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/article-grid.html)
 
 ## What changed since the developer trial
 

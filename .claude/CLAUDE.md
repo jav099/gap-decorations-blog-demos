@@ -20,7 +20,7 @@ Demos for the Chrome 149 gap decorations blog post. Hosted on GitHub Pages.
 │   ├── dashboard-grid.html# Grid, animated rule colors/insets on hover
 │   ├── calendar-week.html # Grid, alternating solid/dashed row rules
 │   ├── dynamic-items.html # Flex wrap, add/remove/resize items, JS interactive
-│   ├── photo-gallery.html # Grid with empty cells, rule-visibility-items toggle
+│   ├── article-grid.html  # Grid with empty cells, rule-visibility-items toggle
 │   └── interactive-playground.html # Interactive controls for all gap decoration properties
 └── screenshots/           # PNGs used in README and index.html
 ```
