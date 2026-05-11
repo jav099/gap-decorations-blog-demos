@@ -30,18 +30,21 @@ The column-rule property already handles this for multi-column layouts. But grid
 
 Grid and flexbox containers now accept `column-rule`, which previously only worked in multi-column layouts. A new `row-rule` property handles horizontal gaps. The resulting decorations are purely visual and won't affect your existing layouts. If you already use `column-rule` in multi-column, nothing changes for you.
 
-For example, if you’d like to make use of this property in grid, simply set the `column-rule` and `row-rule` shorthands to include a rule width, style and color as shown in the following example:
+For example, here’s a flex container with three panels using a list of styles for its column and row rules:
 
 ```css
-.grid {
-  display: grid;
-  gap: 1rem;
-  column-rule: 1px solid #ccc;
-  row-rule: 1px solid #ccc;
+.flex-split {
+  column-rule-width: 2px;
+  column-rule-style: dashed, solid;
+  column-rule-color: #d4d0c8;
 }
 ```
 
-As illustrated in this example, both row-rule and column-rule accept the same shorthand for width, style, and color. And you can even use the rule shorthand to set both at once.
+![Split screen demo showing dashed and solid column rules between flex panels](screenshots/split-screen-1.png)
+
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/split-screen.html)
+
+As illustrated in this example, both row-rule and column-rule accept the same shorthand for width, style, and color. And you can use the rule shorthand to set both at once.
 
 ### New properties
 
@@ -52,24 +55,33 @@ However, we didn't just bring `column-rule` to other layout modes and add the `r
 Gap decorations support `repeat()` for their width, style, and color values. This lets you vary decorations across gaps in short form, similar to the `repeat()` syntax available when setting up your track definitions in grid:
 
 ```css
-.grid {
-  column-rule-width: repeat(2, 1px), 4px;
-  column-rule-style: solid;
+.settings-panel {
+  row-rule: 1px solid #243352;
+  row-rule-width: repeat(2, 1px), 4px;
 }
 ```
 
-This gives the first two column gaps a 1px rule and the third a 4px rule, cycling if there are more gaps than values.
+![Settings list demo with grouped separators using repeat()](screenshots/settings.png)
 
-You can also pass multiple values directly without `repeat()`. For example, alternating row rule colors:
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/settings-list.html)
+
+This gives the first two row gaps a 1px rule and the third a 4px rule, cycling if there are more gaps than values.
+
+You can also pass multiple values directly without `repeat()`. For example, alternating row rule styles for hour and half-hour boundaries in a calendar:
 
 ```css
-.grid {
-  row-rule: 1px solid;
-  row-rule-color: red, blue;
+.calendar {
+  row-rule-width: 2px, 1px;
+  row-rule-style: solid, dashed;
+  row-rule-color: #e8e4df, #f0ece7;
 }
 ```
 
-This alternates between red and blue for each row gap.
+![Calendar week view with alternating solid and dashed row rules](screenshots/calendar.png)
+
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/calendar-week.html)
+
+This alternates between a solid rule for hour boundaries and a dashed rule for half-hours.
 
 ### Controlling decoration breaks
 
@@ -82,12 +94,18 @@ The `column-rule-break` and `row-rule-break` properties control how decorations 
 For example, if you set rule-break to intersection in a grid container, you will observe that rules break at gap intersections rather than continuing through:
 
 ```css
-.grid {
-  column-rule: 1px solid #5a9e9e;
-  row-rule: 1px solid #c27a6b;
-  rule-break: intersection
+.dashboard {
+  column-rule-style: solid;
+  column-rule-color: #fbbf24, #34d399;
+  column-rule-width: 1px, 3px;
+  column-rule-break: intersection;
+  row-rule: 1px solid #1e1e36;
 }
 ```
+
+![Dashboard grid demo with intersection breaks and alternating column rule colors](screenshots/dashboard.png)
+
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/dashboard-grid.html)
 
 If you set rule-break to none, the rules will run continuously through intersections without breaking:
 
@@ -99,41 +117,47 @@ If you set rule-break to none, the rules will run continuously through intersect
 }
 ```
 
+You can try this value in the [interactive playground](https://microsoftedge.github.io/Demos/css-gap-decorations/playground.html).
+
 ### Extending or shrinking decorations
 
-The `column-rule-inset` and `row-rule-inset` properties control how far decorations extend within a gap. You can set insets on all sides at once with the shorthand, or target insets asymmetrically with`column-rule-inset-cap` (for endpoints that have no crossing gaps, like edges of container) and `column-rule-inset-junction` (for endpoints that intersect with other gaps). 
+The `column-rule-inset` and `row-rule-inset` properties control how far decorations extend within a gap. You can set insets on all sides at once with the shorthand, or target insets asymmetrically with `column-rule-inset-cap` (for endpoints that have no crossing gaps, like edges of container) and `column-rule-inset-junction` (for endpoints that intersect with other gaps). 
 
 Values can be lengths, percentages, or the `overlap-join` keyword.
 
-For example, setting `rule-inset` to 9px combined with `rule-break: intersection` will make all decorations "shrink" inwards 9px:
+For example, setting `rule-inset` to 5px will make all decorations "shrink" inwards 5px:
 
 ```css
-.flex {
+.container {
   display: flex;
   flex-wrap: wrap;
-  column-rule: 1px solid #5a9e9e;
-  row-rule: 1px solid #c27a6b;
-  column-rule-inset: 9px;
-  row-rule-inset: 9px;
-  rule-break: intersection;
+  column-rule: 1px solid #2a2a45;
+  column-rule-color: #60a5fa, #34d399, #a78bfa;
+  rule-inset: 5px;
+  row-rule: 1px solid #2a2a45;
 }
 ```
 
-Setting `rule-inset-cap` to 16px and `rule-inset-junction` to 0px will give you "shrunken" decorations at container edges, but still break and be flush at intersections:
+![Dynamic flex items demo with 5px rule inset](screenshots/flex-items.png)
+
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/dynamic-items.html)
+
+Setting `rule-inset-cap` to 0px and `rule-inset-junction` to 10px gives decorations that are flush at container edges but inset at intersections. The dashboard demo shown earlier uses this approach, and the insets animate on hover:
 
 
 ```css
-.flex {
-  display: flex;
-  flex-wrap: wrap;
-  column-rule: 1px solid #5a9e9e;
-  row-rule: 1px solid #c27a6b;
-  column-rule-inset-cap: 16px;
-  column-rule-inset-junction: 0px;
-  row-rule-inset-cap: 16px;
-  row-rule-inset-junction: 0px;
+.dashboard {
+  rule-inset-cap: 0px;
+  rule-inset-junction: 10px;
+  transition: rule-inset-junction 0.4s;
+}
+.dashboard:hover {
+  rule-inset-junction: 0px;
 }
 ```
+![Dashboard grid demo with intersection breaks and alternating column rule colors](screenshots/dashboard.png)
+
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/dashboard-grid.html)
 
 ### Visibility
 
@@ -146,102 +170,42 @@ Setting `rule-inset-cap` to 16px and `rule-inset-junction` to 0px will give you 
 
 The `rule-visibility-items` shorthand sets both at once.
 
-Setting `rule-visibility-items` to `all` will show rules in every gap, even those without adjacent items:
+Setting `rule-visibility-items` to `between` will show rules only between adjacent items, hiding them in gaps adjacent to empty cells:
 
 ```css
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-rule: 1px solid #5a9e9e;
-  row-rule: 1px solid #c27a6b;
-  rule-visibility-items: all;
-}
-```
-
-On the other hand, setting `rule-visibility-items` to `between` will show rules only between adjacent items, hiding them in empty gaps:
-
-```css
-.grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-rule: 1px solid #5a9e9e;
-  row-rule: 1px solid #c27a6b;
+section {
+  rule: 2px solid black;
   rule-visibility-items: between;
 }
 ```
 
+![Article grid with rule-visibility-items: all](screenshots/article-grid.png)
+
+[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/article-grid.html)
+
+On the other hand, setting `rule-visibility-items` to `all` will show rules in every gap, even those without adjacent items
+
 ### Animating decorations
 
-Rule width, color, and insets are animatable. You can transition them on hover or any other state change:
+Rule width, color, and insets are animatable. You can transition them on hover or any other state change. The dashboard demo shown earlier transitions rule colors and insets on hover:
 
 ```css
-.grid {
-  column-rule: 1px solid #ccc;
-  column-rule-inset: 0px;
-  transition: column-rule-color 0.3s, column-rule-inset 0.3s;
+.dashboard {
+  column-rule-color: #fbbf24, #34d399;
+  rule-inset-junction: 10px;
+  transition: column-rule-color 0.4s, rule-inset-junction 0.4s;
 }
-
-.grid:hover {
-  column-rule-color: tomato;
-  column-rule-inset: 10px;
+.dashboard:hover {
+  column-rule-color: #3b82f6, #3b82f6;
+  rule-inset-junction: 0px;
 }
 ```
 
 ## Demos
 
-All demos are available at [jav099.github.io/gap-decorations-blog-demos](https://jav099.github.io/gap-decorations-blog-demos/).
+All demos shown in this post are available at [jav099.github.io/gap-decorations-blog-demos](https://jav099.github.io/gap-decorations-blog-demos/).
 
 The [developer trial blog post](https://developer.chrome.com/blog/gap-decorations) includes several more demos, including an [interactive playground](https://microsoftedge.github.io/Demos/css-gap-decorations/playground.html), a [burger menu](https://microsoftedge.github.io/Demos/css-gap-decorations/burger-menu.html), a [notebook layout](https://microsoftedge.github.io/Demos/css-gap-decorations/notebook.html), and a [magazine-style layout](https://microsoftedge.github.io/Demos/css-gap-decorations/daily-css-news.html) with a sudoku grid.
-
-### Split screen
-
-A flex container with three panels using a list of styles: `dashed, solid` for the column rules. On narrow viewports, the layout switches to `flex-direction: column` and the same pattern applies to the row rules.
-
-![Split screen demo on desktop](screenshots/split-screen-1.png)
-
-![Split screen demo on mobile](screenshots/split-screen-2.png)
-
-[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/split-screen.html)
-
-### Settings list
-
-A flex column where `repeat()` creates grouped separators. The pattern `repeat(2, 1px), 4px` cycles across all gaps, giving a thicker rule every third gap to visually separate groups without extra markup.
-
-![Settings list demo](screenshots/settings.png)
-
-[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/settings-list.html)
-
-### Dashboard grid
-
-A grid dashboard with alternating column rule colors and widths. On hover, the rules transition to a uniform color and the junction insets animate.
-
-![Dashboard grid demo](screenshots/dashboard.png)
-
-[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/dashboard-grid.html)
-
-### Calendar week view
-
-A weekly calendar grid with alternating row rules: solid for hour boundaries, dashed for half-hours.
-
-![Calendar week view demo](screenshots/calendar.png)
-
-[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/calendar-week.html)
-
-### Dynamic flex items
-
-A wrapping flex container where items can be added or removed. The decorations adapt automatically as items reflow. A width slider shows how the rules update as the container resizes.
-
-![Dynamic flex items demo](screenshots/flex-items.png)
-
-[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/dynamic-items.html)
-
-### Article grid
-
-A grid of articles with intentional empty cells, demonstrating `rule-visibility-items`. Toggle between `normal`, `all`, `between`, and `around` to see how rules appear or disappear around empty slots.
-
-![Article grid demo](screenshots/article-grid.png)
-
-[Try it](https://jav099.github.io/gap-decorations-blog-demos/demos/article-grid.html)
 
 ## What changed since the developer trial
 
@@ -252,16 +216,8 @@ If you tried gap decorations during the developer trial (Chrome 139), here's wha
 - The `column-rule-visibility-items` and `row-rule-visibility-items` properties were added
 - Animation support was added.
 
-## Browser support
+## Use Gap Decorations today!
 
-| Browser | Support |
-|---------|---------|
-| Chrome  | 149+    |
-| Edge    | 149+    |
-
-
-## Try it
-
-Gap decorations work today in Chrome 149. In browsers without support, gaps render normally with no decorations visible.
+The CSS Gap decorations feature works today in Chrome and Edge 149. In browsers without support, gaps render normally with no decorations visible (outside of multicolumn layouts, which already supported a subset of the functionality).
 
 File bugs at the [Chromium issue tracker](https://issues.chromium.org/issues/wizard). For more background, see the [CSS Gap Decorations specification](https://www.w3.org/TR/css-gaps-1/).
