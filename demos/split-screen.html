@@ -103,15 +103,15 @@
         0 8px 24px rgba(0, 0, 0, 0.08);
     }
 
-    /* Files panel */
-    .panel-files {
+    /* Sidebar panel */
+    .panel-sidebar {
       flex: 0 0 200px;
       background: var(--bg-editor);
       padding: 24px 20px;
       min-width: 0;
     }
 
-    .panel-files h2 {
+    .panel-sidebar h2 {
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 500;
@@ -121,25 +121,24 @@
       margin-bottom: 16px;
     }
 
-    .file-tree {
+    .nav-list {
       list-style: none;
-      font-family: var(--font-mono);
       font-size: 13px;
       color: var(--text-primary);
     }
 
-    .file-tree li {
+    .nav-list li {
       padding: 5px 10px;
       border-radius: 6px;
       cursor: default;
     }
 
-    .file-tree li.active {
+    .nav-list li.active {
       background: rgba(0, 0, 0, 0.06);
-      color: var(--text-primary);
+      font-weight: 500;
     }
 
-    .file-tree li::before {
+    .nav-list li::before {
       content: '';
       display: inline-block;
       width: 6px;
@@ -150,19 +149,19 @@
       vertical-align: middle;
     }
 
-    .file-tree li.active::before {
+    .nav-list li.active::before {
       background: var(--text-primary);
     }
 
-    /* Editor panel */
-    .panel-editor {
+    /* Main content panel */
+    .panel-main {
       flex: 1;
       background: var(--bg-editor);
       padding: 24px;
       min-width: 0;
     }
 
-    .panel-editor h2 {
+    .panel-main h2 {
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 500;
@@ -172,35 +171,40 @@
       margin-bottom: 16px;
     }
 
-    .code-block {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      line-height: 1.8;
+    .content-block {
+      font-size: 14px;
+      line-height: 1.7;
       color: var(--text-primary);
     }
 
-    .code-block .line-num {
-      display: inline-block;
-      width: 28px;
-      color: #b8b5ad;
-      user-select: none;
+    .content-block p {
+      margin-bottom: 12px;
     }
 
-    .code-block .kw { color: #8839ef; }
-    .code-block .prop { color: #1e66f5; }
-    .code-block .val { color: #40a02b; }
-    .code-block .sel { color: #d20f39; }
-    .code-block .punc { color: #9ca0b0; }
+    .content-swatch {
+      display: inline-block;
+      width: 100%;
+      height: 10px;
+      background: #ddd8d0;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
 
-    /* Preview panel */
-    .panel-preview {
+    .content-swatch:nth-child(2) { width: 92%; }
+    .content-swatch:nth-child(3) { width: 78%; }
+    .content-swatch:nth-child(4) { width: 85%; }
+    .content-swatch:nth-child(5) { width: 65%; }
+    .content-swatch:nth-child(6) { width: 90%; }
+
+    /* Detail panel */
+    .panel-detail {
       flex: 1;
       background: var(--bg-preview);
       padding: 24px;
       min-width: 0;
     }
 
-    .panel-preview h2 {
+    .panel-detail h2 {
       font-family: var(--font-mono);
       font-size: 11px;
       font-weight: 500;
@@ -210,13 +214,7 @@
       margin-bottom: 16px;
     }
 
-    .preview-content {
-      font-size: 14px;
-      color: var(--text-primary);
-      line-height: 1.7;
-    }
-
-    .preview-box {
+    .detail-card {
       width: 100%;
       height: 48px;
       background: linear-gradient(135deg, #cba6f7 0%, #89b4fa 100%);
@@ -224,28 +222,28 @@
       margin-bottom: 16px;
     }
 
-    .preview-text-line {
+    .detail-line {
       height: 10px;
       background: #e8e6e1;
       border-radius: 4px;
       margin-bottom: 10px;
     }
 
-    .preview-text-line:nth-child(2) { width: 85%; }
-    .preview-text-line:nth-child(3) { width: 70%; }
-    .preview-text-line:nth-child(4) { width: 90%; }
-    .preview-text-line:nth-child(5) { width: 55%; }
+    .detail-line:nth-child(2) { width: 85%; }
+    .detail-line:nth-child(3) { width: 70%; }
+    .detail-line:nth-child(4) { width: 90%; }
+    .detail-line:nth-child(5) { width: 55%; }
 
     @media (max-width: 600px), (orientation: portrait) {
       .split {
         flex-direction: column;
       }
 
-      .panel-files {
+      .panel-sidebar {
         flex: none;
       }
 
-      .file-tree {
+      .nav-list {
         display: flex;
         gap: 4px;
         flex-wrap: wrap;
@@ -272,35 +270,33 @@
   </div>
 
   <div class="split">
-    <div class="panel-files">
-      <h2>Explorer</h2>
-      <ul class="file-tree">
-        <li class="active">style.css</li>
-        <li>index.html</li>
-        <li>app.js</li>
-        <li>utils.ts</li>
+    <div class="panel-sidebar">
+      <h2>Menu</h2>
+      <ul class="nav-list">
+        <li class="active">Dashboard</li>
+        <li>Analytics</li>
+        <li>Reports</li>
+        <li>Settings</li>
       </ul>
     </div>
-    <div class="panel-editor">
-      <h2>style.css</h2>
-      <div class="code-block">
-        <div><span class="line-num">1</span><span class="sel">.container</span> <span class="punc">{</span></div>
-        <div><span class="line-num">2</span>  <span class="prop">display</span><span class="punc">:</span> <span class="val">flex</span><span class="punc">;</span></div>
-        <div><span class="line-num">3</span>  <span class="prop">gap</span><span class="punc">:</span> <span class="val">1px</span><span class="punc">;</span></div>
-        <div><span class="line-num">4</span>  <span class="prop">rule</span><span class="punc">:</span> <span class="val">2px solid #ccc</span><span class="punc">;</span></div>
-        <div><span class="line-num">5</span>  <span class="prop">border-radius</span><span class="punc">:</span> <span class="val">12px</span><span class="punc">;</span></div>
-        <div><span class="line-num">6</span><span class="punc">}</span></div>
+    <div class="panel-main">
+      <h2>Content</h2>
+      <div class="content-block">
+        <div class="content-swatch"></div>
+        <div class="content-swatch"></div>
+        <div class="content-swatch"></div>
+        <div class="content-swatch"></div>
+        <div class="content-swatch"></div>
+        <div class="content-swatch"></div>
       </div>
     </div>
-    <div class="panel-preview">
-      <h2>Preview</h2>
-      <div class="preview-content">
-        <div class="preview-box"></div>
-        <div class="preview-text-line"></div>
-        <div class="preview-text-line"></div>
-        <div class="preview-text-line"></div>
-        <div class="preview-text-line"></div>
-      </div>
+    <div class="panel-detail">
+      <h2>Details</h2>
+      <div class="detail-card"></div>
+      <div class="detail-line"></div>
+      <div class="detail-line"></div>
+      <div class="detail-line"></div>
+      <div class="detail-line"></div>
     </div>
   </div>
 </body>
